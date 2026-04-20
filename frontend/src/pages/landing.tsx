@@ -173,7 +173,7 @@ export  default function Landing(){
       </div>
     </div>
 
-<div className="border bg-gray-200 border-gray-200 mt-30 py-10 mr-20 ml-20">
+<div className="border bg-gray-100 border-gray-200 mt-30 py-10 mr-20 ml-20">
       <h1 className="font-bold text-3xl text-center">Loved by Finance Teams</h1>
       <p className="text-center text-gray-500">See What our Customer have to say</p>
 <div className="flex">
