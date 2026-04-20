@@ -264,26 +264,26 @@ export  default function Landing(){
   <div className="grid grid-cols-3">
   <div>
     <h1 className="font-bold py-2 mt-2">Product</h1>
-    <span className="text-gray-500 block">Features</span>
-    <span className="text-gray-500 block">Pricing</span>
-    <span className="text-gray-500 block">Security</span>
-    <span className="text-gray-500 block">Roadmap</span>
+    <span className="text-gray-500 block hover:text-black">Features</span>
+    <span className="text-gray-500 block hover:text-black">Pricing</span>
+    <span className="text-gray-500 block hover:text-black">Security</span>
+    <span className="text-gray-500 block hover:text-black">Roadmap</span>
   </div>
 
   <div>
     <h1 className="font-bold py-2 mt-2">Product</h1>
-    <span className="text-gray-500 block">Features</span>
-    <span className="text-gray-500 block">Pricing</span>
-    <span className="text-gray-500 block">Security</span>
-    <span className="text-gray-500 block">Roadmap</span>
+    <span className="text-gray-500 block hover:text-black">Features</span>
+    <span className="text-gray-500 block hover:text-black">Pricing</span>
+    <span className="text-gray-500 block hover:text-black">Security</span>
+    <span className="text-gray-500 block hover:text-black">Roadmap</span>
   </div>
 
   <div>
     <h1 className="font-bold py-2 mt-2">Resoucest</h1>
-    <span className="text-gray-500 block">API References</span>
-    <span className="text-gray-500 block">Community</span>
-    <span className="text-gray-500 block">Help Center</span>
-    <span className="text-gray-500 block">Documentaion</span>
+    <span className="text-gray-500 block hover:text-black">API References</span>
+    <span className="text-gray-500 block hover:text-black">Community</span>
+    <span className="text-gray-500 block hover:text-black">Help Center</span>
+    <span className="text-gray-500 block hover:text-black">Documentaion</span>
   </div>
   </div>
 
