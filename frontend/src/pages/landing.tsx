@@ -257,10 +257,42 @@ export  default function Landing(){
     <p className="text-center py-3 text-sm text-gray-500">No credit card required. 14-days free trail</p>
   </div>
 
-<footer className="mt-20 ml-25 border-b-4 border-indigo-500 border-dashed">
-  <h1>Finace</h1>
+  <hr className="border-gray-300 mt-20" />
+<footer className="mt-15 ml-25 ">
+  <h1 className="font-bold">Capital Dash</h1>
+  <p className="text-sm text-gray-500">Proffesional finance management platform powered by Capital_in</p>
+  <div className="grid grid-cols-3">
+  <div>
+    <h1 className="font-bold py-2 mt-2">Product</h1>
+    <span className="text-gray-500 block">Features</span>
+    <span className="text-gray-500 block">Pricing</span>
+    <span className="text-gray-500 block">Security</span>
+    <span className="text-gray-500 block">Roadmap</span>
+  </div>
+
+  <div>
+    <h1 className="font-bold py-2 mt-2">Product</h1>
+    <span className="text-gray-500 block">Features</span>
+    <span className="text-gray-500 block">Pricing</span>
+    <span className="text-gray-500 block">Security</span>
+    <span className="text-gray-500 block">Roadmap</span>
+  </div>
+
+  <div>
+    <h1 className="font-bold py-2 mt-2">Resoucest</h1>
+    <span className="text-gray-500 block">API References</span>
+    <span className="text-gray-500 block">Community</span>
+    <span className="text-gray-500 block">Help Center</span>
+    <span className="text-gray-500 block">Documentaion</span>
+  </div>
+  </div>
+
+
+  <hr className="border-gray-300 mt-20 mb-5 mr-30 ml-30" />
+
 </footer>
-    
+  <p className="mt-10 text-gray-500 mb-30 text-center text-lg">© 2026 FinanceDash by adelevate_in. All rights reserved.</p>
+
     </div>
  )
 }
