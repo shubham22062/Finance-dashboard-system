@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
 export default function Landing() {
-  const Navbar = () => (
+  const Navbar:React.FC = () => (
     <nav className="flex justify-between items-center px-4 md:px-10 h-20 bg-gray-50 border-b border-gray-100 fixed top-0 left-0 w-full z-50">
       <div className="font-bold">Capital Dash</div>
       <div className="flex gap-2 md:gap-4">
