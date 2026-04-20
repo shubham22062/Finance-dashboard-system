@@ -146,6 +146,8 @@ export default function Landing() {
       </div>
 
       {/* FOOTER */}
+
+        <hr className="mt-10 border-gray-200" />
       <footer className="mt-20 px-6 md:px-16">
         <h1 className="font-bold">Capital Dash</h1>
         <p className="text-sm text-gray-500">
@@ -172,7 +174,7 @@ export default function Landing() {
           </div>
         </div>
 
-        <hr className="mt-10" />
+        <hr className="mt-10 border-gray-200" />
 
         <p className="text-center text-gray-500 mt-6 mb-10">
           © 2026 FinanceDash. All rights reserved.
