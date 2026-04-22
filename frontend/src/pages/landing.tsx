@@ -1,16 +1,17 @@
 import React from "react"
+import { Link } from "react-router-dom";
 
 export default function Landing() {
   const Navbar:React.FC = () => (
     <nav className="flex justify-between items-center px-4 md:px-10 h-20 bg-gray-50 border-b border-gray-100 fixed top-0 left-0 w-full z-50">
       <div className="font-bold">Capital Dash</div>
       <div className="flex gap-2 md:gap-4">
-        <button className="rounded-3xl border-2 border-gray-300 hover:bg-gray-400 px-3 py-1 md:px-4 md:py-2">
+        <Link to="/signin" className="rounded-3xl border-2 border-gray-300 hover:bg-gray-400 px-3 py-1 md:px-4 md:py-2">
           Sign In
-        </button>
-        <button className="rounded-3xl border-2 p-2 md:p-3 bg-green-400 border-green-400 text-white font-bold hover:bg-green-500">
+        </Link>
+        <Link to= "/signup" className="rounded-3xl border-2 p-2 md:p-3 bg-green-400 border-green-400 text-white font-bold hover:bg-green-500">
           Get Started
-        </button>
+        </Link>
       </div>
     </nav>
   );
@@ -32,14 +33,14 @@ export default function Landing() {
           Modern Teams
         </h2>
 
-        <p className="mt-6 text-lg md:text-xl text-gray-500 max-w-3xl mx-auto">
+        <p className="mt-6 mb-6 text-lg md:text-xl text-gray-500 max-w-3xl mx-auto">
           Streamline your financial operations with advanced analytics,
           role-based access control, and real-time insights.
         </p>
 
-        <button className="font-bold rounded-3xl text-white text-lg bg-green-400 border-green-400 mt-8 hover:bg-green-500 px-6 py-3">
+        <Link to="/signup" className="font-bold rounded-3xl text-white text-lg bg-green-400 border-green-400 mt-8 hover:bg-green-500 px-6 py-3">
           Start Free Trial
-        </button>
+        </Link>
       </div>
 
       {/* STATS */}
@@ -132,13 +133,13 @@ export default function Landing() {
         <h1 className="font-bold text-2xl md:text-3xl">
           Ready to Get Started?
         </h1>
-        <p className="text-gray-500 mt-2">
+        <p className="text-gray-500 mt-2 mb-4">
           Join hundreds of teams managing finances
         </p>
 
-        <button className="rounded-2xl text-white bg-emerald-400 py-3 px-6 mt-6 transition-transform duration-300 hover:scale-105 hover:bg-emerald-700">
+        <Link to="/signup" className="rounded-2xl text-white bg-emerald-400 py-3 px-6 mt-6 transition-transform duration-300 hover:scale-105 hover:bg-emerald-700">
           Start Your Free Trial
-        </button>
+        </Link>
 
         <p className="text-sm text-gray-500 mt-2">
           No credit card required

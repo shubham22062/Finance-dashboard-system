@@ -7,6 +7,7 @@ import recordRoute from "./routes/record.routes.js"
 import dashboardRoutes from "./routes/dashboard.routes.js"
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger.js";
+import cors from "cors"
 
 
 dotenv.config()
@@ -14,6 +15,7 @@ dotenv.config()
 const PORT = process.env.PORT || 7000;
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 
