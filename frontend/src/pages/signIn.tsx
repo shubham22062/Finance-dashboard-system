@@ -28,8 +28,9 @@ export default function SignIn(){
 
     const handleSubmit = async(e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
+        console.log("data sent" ,data)
         try {
-            const res = await axios.post("http://localhost:4000/api/auth/login")
+            const res = await axios.post("http://localhost:4000/api/auth/login",data)
 
             localStorage.setItem("token", res.data.token)
 
