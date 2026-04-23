@@ -50,7 +50,7 @@ export default function SignIn(){
         
         <div className="flex justify-center items-center bg-green-50 min-h-screen">
             <form onSubmit={handleSubmit}
-                className="w-110">
+                className="w-96">
                 <div className="bg-gray-100 justify-items-center p-10 rounded-2xl">
                 <h1 className="font-bold">Captail Dash</h1>
                 <span className="text-gray-500 block">Welcome Back!!</span>
