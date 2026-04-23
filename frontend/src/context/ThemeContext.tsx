@@ -1,19 +1,32 @@
-import { createContext,useContext,useEffect,useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const ThemeContext = createContext<any>(null);
+type ThemeContextType = {
+  dark: boolean;
+  setDark: (value: boolean) => void;
+};
 
-export const ThemeProvider = ({children}:any)=>{
-    const [dark, setDark] = useState(false);
+const ThemeContext = createContext<ThemeContextType | null>(null);
 
-    useEffect(()=>{
-        document.documentElement.classList.toggle("dark",dark);
-    },[dark])
+export const ThemeProvider = ({ children }: any) => {
+  const [dark, setDark] = useState(false);
 
-    return(
-        <ThemeContext.Provider value={{dark, setDark}}>
-            {children}
-        </ThemeContext.Provider>
-    )
-}
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [dark]);
 
-export const useTheme = ()=>useContext(ThemeContext);
+  return (
+    <ThemeContext.Provider value={{ dark, setDark }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme must be used inside ThemeProvider");
+  return ctx;
+};
