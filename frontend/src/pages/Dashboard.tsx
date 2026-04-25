@@ -17,8 +17,8 @@ export default function Dashboard(){
                 <h1 className="text-3xl font-bold">Dashboard Overview </h1>
                  <p className="text-gray-600 mt-3">Monitor your financial performance at a glance</p>
 
-            <div className="mt-4 flex gap-8">
-                 <div className="border-2 rounded-xl p-6 border-gray-200 w-80 h-40 transition-transform duration-300 hover:scale-105 ">
+            <div className="mt-4 flex gap-3">
+                 <div className="border-2 rounded-xl p-6 border-gray-200 w-90 h-40 transition-transform duration-300 hover:scale-105 ">
                     <div className="flex justify-between">
                     <span className="text text-gray-400">Total Income</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-8 border-2 rounded-md bg-green-200 border-green-300">
@@ -37,7 +37,7 @@ export default function Dashboard(){
                     
                  </div>
 
-                 <div className="border-2 rounded-xl p-6 border-gray-200 w-80 h-40 transition-transform duration-300 hover:scale-105 ">
+                 <div className="border-2 rounded-xl p-6 border-gray-200 w-90 h-40 transition-transform duration-300 hover:scale-105 ">
                     <div className="flex justify-between">
                     <span className="text text-gray-400">Total Expenses</span>
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-8 border-2 rounded-md bg-red-200 border-red-300">
@@ -58,7 +58,7 @@ export default function Dashboard(){
                     
                  </div>
 
-                 <div className="border-2 rounded-xl p-6 border-gray-200 bg-blue-50 w-80 h-40 transition-transform duration-300 hover:scale-105 ">
+                 <div className="border-2 rounded-xl p-6 border-gray-200 bg-blue-50 w-90 h-40 transition-transform duration-300 hover:scale-105 ">
                     <div className="flex justify-between">
                     <span className="text text-gray-400">Net Balance</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-8 border-2 rounded-md bg-blue-200 border-blue-300">
