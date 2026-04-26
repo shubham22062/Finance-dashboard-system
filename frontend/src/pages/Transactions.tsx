@@ -10,6 +10,14 @@ export default function Transactions(){
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const [fromData, setFormData] = useState({
+        amount:"",
+        type:"Income",
+        category:"",
+        data:"",
+        note:""
+    })
+
 
     return(
         
@@ -44,8 +52,8 @@ export default function Transactions(){
                             onChange={(e)=>setType(e.target.value)}
                             className="border-2 bg-gray-100 border-gray-300 w-80 rounded-md px-2 h-7"
                         >
-                            <option value="Income">Income</option>
-                            <option value="Expense">Expense</option>
+                            <option value="=income">Income</option>
+                            <option value="expense">Expense</option>
                             
                         </select>
                     </div>
