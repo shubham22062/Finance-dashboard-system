@@ -1,10 +1,12 @@
+import { useState } from "react";
 import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
 
 
 
 export default function Transactions(){
-    
+    const [type,setType] = useState("Income");
+    const [category, setCategory] = useState("")
 
 
     return(
@@ -24,14 +26,44 @@ export default function Transactions(){
                 </div>
             </div>
 
-            <div className="mt-5 border-2 border-gray-300 h-25 w-full rounded-xl p-8">
-                <div>
+            <div className="mt-5 border-2 border-gray-300 h-25 w-full rounded-xl p-8 ">
+                <div className="flex gap-4">
+                    <div>
                     <input type="search"
                      className="border-2 bg-gray-100 border-gray-300 w-80 rounded-md px-2"
                      placeholder="Search for transactions..."
                      
                     />
+                    </div>
+                    <div>
+                        <select
+                            value={type}
+                            onChange={(e)=>setType(e.target.value)}
+                            className="border-2 bg-gray-100 border-gray-300 w-80 rounded-md px-2 h-7"
+                        >
+                            <option value="Income">Income</option>
+                            <option value="Expense">Expense</option>
+                            
+                        </select>
+                    </div>
+
+                    <div>
+                        <select
+                            value={category}
+                            onChange={(e)=>setCategory(e.target.value)}
+                            className="border-2 bg-gray-100 border-gray-300 w-80 rounded-md px-2 h-7"
+                         >
+                            <option value="">Select category</option>
+                            <option value="All Categories">All Categories</option>
+                            <option value="Food">Food</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="others">others</option>
+
+                        </select>
+                    </div>
                 </div>
+
             </div>
           
 
