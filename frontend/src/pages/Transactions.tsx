@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
 import axios from "axios";
@@ -19,6 +19,10 @@ export default function Transactions(){
         data:"",
         note:""
     })
+
+    useEffect(()=>{
+        fetchRecords();
+    },[type,category]);
 
     const API = axios.create({
         baseURL:"http://localhost:4000/api",
