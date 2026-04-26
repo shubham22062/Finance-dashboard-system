@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
+import axios from "axios";
 
 
 
@@ -9,6 +10,7 @@ export default function Transactions(){
     const [category, setCategory] = useState("")
 
     const [isOpen, setIsOpen] = useState(false);
+    const [transactions, setTransactions] = useState<any[]>([])
 
     const [fromData, setFormData] = useState({
         amount:"",
@@ -17,6 +19,46 @@ export default function Transactions(){
         data:"",
         note:""
     })
+
+    const API = axios.create({
+        baseURL:"http://localhost:4000/api",
+    });
+
+    API.interceptors.request.use((req)=>{
+        const token = localStorage.getItems("token");
+
+        if(token){
+            req.headers.Authorization = `Bearer ${token}`
+        }
+        return req;
+    });
+
+    const handleSubmit = async(e:any)=>{
+        e.preventDefault();
+
+       try {
+         const res = await API.post ("/record", FormData)
+         setTransactions((prev)=>[res.data, ...prev]);
+         setIsOpen(false)
+       } catch (err:any) {
+            console.log(err.response?.data || err.message)
+       }
+    }
+
+   const fetchRecords = async()=>{
+    try {
+        const res = await API.get("/records",{
+            params:{
+                type: type==="All"? undefined: type,
+                category:category === "All Categories" ? undefined : category,
+            },
+        })
+
+        setTransactions(res.data.records)
+    } catch (err) {
+        console.log(err);
+    }
+   } 
 
 
     return(
