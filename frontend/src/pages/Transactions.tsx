@@ -20,9 +20,7 @@ export default function Transactions(){
         note:""
     })
 
-    useEffect(()=>{
-        fetchRecords();
-    },[type,category]);
+    
 
     const API = axios.create({
         baseURL:"http://localhost:4000/api",
@@ -63,6 +61,30 @@ export default function Transactions(){
         console.log(err);
     }
    } 
+
+   useEffect(()=>{
+        fetchRecords();
+    },[type,category])
+
+
+
+    const deleteRecords = async(id:string)=>{
+        try {
+            await API.delete(`/records/${id}`);
+            fetchRecords()
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const handleUpdate = async (id:string, updatedData:any)=>{
+        try {
+            await API.patch(`/records/$/{id}`, updatedData);
+            fetchRecords()
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
 
     return(
