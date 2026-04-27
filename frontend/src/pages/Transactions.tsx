@@ -3,89 +3,110 @@ import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
 import axios from "axios";
 
+export interface UserData{
+    amount:number;
+    type:string;
+    category:string;
+    date:string;
+    note:string;
+}
 
+// ✅ Move API outside
+const API = axios.create({
+    baseURL:"http://localhost:4000/api",
+});
+
+API.interceptors.request.use((req)=>{
+    const token = localStorage.getItem("token");
+    console.log(localStorage.getItem("token"))
+    if(token){
+        req.headers.Authorization = `Bearer ${token}`;
+    }
+    return req;
+});
 
 export default function Transactions(){
-    const [type,setType] = useState("Income");
-    const [category, setCategory] = useState("")
+    const [type,setType] = useState("All");
+    const [category, setCategory] = useState("");
 
     const [isOpen, setIsOpen] = useState(false);
-    const [transactions, setTransactions] = useState<any[]>([])
+    const [transactions, setTransactions] = useState<any[]>([]);
 
-    const [fromData, setFormData] = useState({
-        amount:"",
-        type:"Income",
+    const [formData, setFormData] = useState<UserData>({
+        amount:0,
+        type:"income",
         category:"",
-        data:"",
+        date:"",
         note:""
-    })
-
-    
-
-    const API = axios.create({
-        baseURL:"http://localhost:4000/api",
-    });
-
-    API.interceptors.request.use((req)=>{
-        const token = localStorage.getItem("token");
-
-        if(token){
-            req.headers.Authorization = `Bearer ${token}`
-        }
-        return req;
     });
 
     const handleSubmit = async(e:any)=>{
         e.preventDefault();
 
        try {
-         const res = await API.post ("/record", fromData)
-         setTransactions((prev)=>[res.data, ...prev]);
-         setIsOpen(false)
+         await API.post ("/record", formData); // ✅ FIXED
+
+         await fetchRecords();
+         setIsOpen(false);
+
+         setFormData({
+            amount:0,
+            type:"income",
+            category:"",
+            date:"",
+            note:"",
+         });
        } catch (err:any) {
-            console.log(err.response?.data || err.message)
+            console.log(err.response?.data || err.message);
        }
-    }
+    };
 
    const fetchRecords = async()=>{
     try {
-        const res = await API.get("/records",{
+        const res = await API.get("/record",{ // ✅ FIXED
             params:{
                 type: type==="All"? undefined: type,
                 category:category === "All Categories" ? undefined : category,
             },
-        })
+        });
 
-        setTransactions(res.data.records)
+        console.log("API RESPONSE:", res.data)
+
+        setTransactions(res.data.records);
     } catch (err) {
         console.log(err);
     }
-   } 
+   };
 
    useEffect(()=>{
         fetchRecords();
-    },[type,category])
-
-
+    },[type,category]);
 
     const handleDelete = async(id:string)=>{
         try {
-            await API.delete(`/records/${id}`);
-            fetchRecords()
+            await API.delete(`/record/${id}`); // ✅ FIXED
+            fetchRecords();
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
     const handleUpdate = async (id:string, updatedData:any)=>{
         try {
-            await API.patch(`/records/$/{id}`, updatedData);
-            fetchRecords()
+            await API.patch(`/record/${id}`, updatedData); // ✅ FIXED
+            fetchRecords();
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
+    const handleChange = (e:any)=>{
+        const {name, value} = e.target;
+        setFormData({
+            ...formData,
+            [name]:name==="amount" ? Number(value):value
+        });
+    };
 
     return(
         
@@ -111,7 +132,6 @@ export default function Transactions(){
                     <input type="search"
                      className="border-2 bg-gray-100 border-gray-300 w-80 rounded-md px-2"
                      placeholder="Search for transactions..."
-                     
                     />
                     </div>
                     <div>
@@ -120,9 +140,9 @@ export default function Transactions(){
                             onChange={(e)=>setType(e.target.value)}
                             className="border-2 bg-gray-100 border-gray-300 w-80 rounded-md px-2 h-7"
                         >
-                            <option value="=income">Income</option>
+                            <option value="income">Income</option>
                             <option value="expense">Expense</option>
-                            
+                            <option value="All">All</option>
                         </select>
                     </div>
 
@@ -137,20 +157,15 @@ export default function Transactions(){
                             <option value="Food">Food</option>
                             <option value="Travel">Travel</option>
                             <option value="Shopping">Shopping</option>
-                            <option value="others">others</option>
-
+                            <option value="Others">Others</option>
                         </select>
                     </div>
                 </div>
-
-                
-
             </div>
           
           <div className=" mt-5 border-2 w-full min-h-full border-gray-300 rounded-xl">
 
-
-           {transactions.map((t:any)=>(
+           {Array.isArray(transactions) && transactions.map((t:any)=>(
             <div key={t._id} className="grid grid-cols-6 gap-4 p-2 border-t">
                 <span>{new Date(t.date).toLocaleDateString()}</span>
                 <span>{new Date(t.date).toLocaleTimeString()}</span>
@@ -162,87 +177,80 @@ export default function Transactions(){
                     onClick={()=>handleDelete(t._id)}
                     className="text-red-500"
                     >Delete</button>
+                    <button onClick={()=>handleUpdate(t._id,{ // ✅ FIXED
+                        amount:Number(t.amount)+100
+                    })}
+                    className="text-green-500">
+                        Action
+                    </button>
                 </span>
             </div>
-
            ))}
 
         </div>
      </div>
-      {isOpen && (
-  <div
-    className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
-    onClick={() => setIsOpen(false)} // close on outside click
-  >
-    
-    {/* Modal Box */}
-    <div
-      className="bg-white w-150 h-150 p-4 rounded-2xl shadow-xl relative"
-      onClick={(e) => e.stopPropagation()} // prevent close inside
-    >
 
-      {/* Close Button */}
-      <button
-        onClick={() => setIsOpen(false)}
-        className="absolute top-2 right-3 text-xl font-bold"
-      >
-        ✕
-      </button>
+     {/* MODAL */}
+     {isOpen && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+          onClick={() => setIsOpen(false)}>
 
-      <h2 className="text-xl font-bold mb-4">Add Transaction</h2>
+        <div className="bg-white w-125 h-150 p-4 rounded-2xl shadow-xl relative"
+          onClick={(e) => e.stopPropagation()}>
 
-      <form className="flex flex-col gap-3">
+          <button onClick={() => setIsOpen(false)}
+            className="absolute top-2 right-3 text-xl font-bold">✕</button>
 
-        <label>Amount</label>
-        <input
-          type="number"
-          placeholder="Amount"
-          className="border p-2 rounded border-gray-300 bg-gray-200"
-        />
+          <h2 className="text-xl font-bold mb-4">Add Transaction</h2>
 
-        <label>Type</label>
-        <select className="border p-2 rounded border-gray-300 bg-gray-200">
-          <option>Income</option>
-          <option>Expense</option>
-        </select>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
 
-        <label>Category</label>
-        <select className="border p-2 rounded border-gray-300 bg-gray-200">
-          <option>Select Category</option>
-          <option>Food</option>
-          <option>Travel</option>
-          <option>Shopping</option>
-          <option>Others</option>
-        </select>
+            <label>Amount</label>
+            <input name="amount" value={formData.amount} onChange={handleChange}
+              className="border p-2 rounded border-gray-300 bg-gray-200" />
 
-        <label>Date</label>
-        <input type="date" className="border p-2 rounded border-gray-300 bg-gray-200" />
+            <label>Type</label>
+            <select name="type" value={formData.type} onChange={handleChange}
+              className="border p-2 rounded border-gray-300 bg-gray-200">
+                <option value="All">All</option>
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
 
-        <label>Note</label>
-        <textarea
-          placeholder="Note"
-          className="border p-2 rounded border-gray-300 bg-gray-200"
-        />
-        <div className="flex gap-4">
-            <button
-          type="submit"
-          className="bg-green-400 w-45 text-white p-2 rounded-md mt-2 hover:bg-green-500"
-        >
-          Create Transaction
-        </button>
+            <label>Category</label>
+            <select name="category" value={formData.category} onChange={handleChange}
+              className="border p-2 rounded border-gray-300 bg-gray-200">
+              <option value="">Select Category</option> {/* ✅ FIXED */}
+              <option>Food</option>
+              <option>Travel</option>
+              <option>Shopping</option>
+              <option>Others</option>
+            </select>
 
-        <button className="rounded-md bg-gray-300 border-2 border-gray-400  w-40">
-            Cancel
-        </button>
+            <label>Date</label>
+            <input type="date" name="date" value={formData.date} onChange={handleChange}
+              className="border p-2 rounded border-gray-300 bg-gray-200" />
+
+            <label>Note</label>
+            <textarea name="note" value={formData.note} onChange={handleChange}
+              className="border p-2 rounded border-gray-300 bg-gray-200" />
+
+            <div className="flex gap-4">
+              <button type="submit"
+                className="bg-green-400 w-45 text-white p-2 rounded-md mt-2 hover:bg-green-500">
+                Create Transaction
+              </button>
+
+              <button onClick={()=>setIsOpen(false)}
+                className="rounded-md bg-gray-300 border-2 border-gray-400  w-40">
+                Cancel
+              </button>
+            </div>
+          </form>
         </div>
-        
-
-      </form>
-    </div>
-  </div>
-)}       
+      </div>
+     )}
      </div>
      </div>
-     
-    )
+    );
 }
