@@ -27,7 +27,7 @@ export default function Transactions(){
     });
 
     API.interceptors.request.use((req)=>{
-        const token = localStorage.getItems("token");
+        const token = localStorage.getItem("token");
 
         if(token){
             req.headers.Authorization = `Bearer ${token}`
@@ -39,7 +39,7 @@ export default function Transactions(){
         e.preventDefault();
 
        try {
-         const res = await API.post ("/record", FormData)
+         const res = await API.post ("/record", fromData)
          setTransactions((prev)=>[res.data, ...prev]);
          setIsOpen(false)
        } catch (err:any) {
@@ -68,7 +68,7 @@ export default function Transactions(){
 
 
 
-    const deleteRecords = async(id:string)=>{
+    const handleDelete = async(id:string)=>{
         try {
             await API.delete(`/records/${id}`);
             fetchRecords()
@@ -150,16 +150,22 @@ export default function Transactions(){
           <div className=" mt-5 border-2 w-full min-h-full border-gray-300 rounded-xl">
 
 
-            <div className="grid grid-cols-6 grid-flow-row-dense gap-4 p-2">
-                <span>Date</span>
-              <span>Time</span>
-              <span>category</span>
-             <span>Notes</span>
-             <span>Amout</span>
-             <span>Actions</span>
-             </div>
-            
-          </div>
+           {transactions.map((t:any)=>(
+            <div key={t._id} className="grid grid-cols-6 gap-4 p-2 border-t">
+                <span>{new Date(t.date).toLocaleDateString()}</span>
+                <span>{new Date(t.date).toLocaleTimeString()}</span>
+                <span>{t.category}</span>
+                <span>{t.note}</span>
+                <span className={t.type==="income" ? "text-green-500" : "text-red-500"}>{t.amount}</span>
+                <span>
+                    <button 
+                    onClick={()=>handleDelete(t._id)}
+                    className="text-red-500"
+                    >Delete</button>
+                </span>
+            </div>
+
+           ))}
 
         </div>
      </div>
@@ -235,6 +241,7 @@ export default function Transactions(){
     </div>
   </div>
 )}       
+     </div>
      </div>
      
     )
