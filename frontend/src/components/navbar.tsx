@@ -35,7 +35,7 @@ export default function Navbar() {
           Capital Dash
         </div>
 
-        <span className="font-semibold text-black dark:text-gray-200 px-50">
+        <span className="font-bold text-black dark:text-gray-200 px-50">
           Welcome back !! {user?.name || "User"}
         </span>
       </div>
