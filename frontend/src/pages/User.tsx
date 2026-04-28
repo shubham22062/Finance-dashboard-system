@@ -121,7 +121,7 @@ export default function User(){
                     </div>
                 </div>
      {isOpen && (
-    <div className="flex justify-center items-center min-h-screen bg-green-50">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[60] p-4">
      <form
         onSubmit={handleSubmit}
         className="border rounded-xl border-gray-300 bg-gray-100 p-6 w-96"
