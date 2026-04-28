@@ -1,8 +1,11 @@
 import Navbar from "../components/navbar"
 import SideBar from "../components/sidebar"
+import { useState } from "react"
 
 
 export default function User(){
+
+    const [isOpen, setIsOpen] = useState(false);
     return(
         <div className="min-h-screen">
                 <Navbar/>
