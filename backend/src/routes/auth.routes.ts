@@ -1,7 +1,8 @@
 import express from 'express';
-import { Login, Register } from '../controllers/auth.controllers.js';
+import { Login, Register, getUsers} from '../controllers/auth.controllers.js';
 import { validate } from '../middleware/validate.middleware.js';
 import { loginSchema, registerSchema } from '../validators/auth.validators.js';
+
 
 const router = express.Router();
 
@@ -80,5 +81,7 @@ router.post("/register", validate(registerSchema), Register);
  *               token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
  */
 router.post("/login", validate(loginSchema), Login);
+
+router.get("/users", getUsers);
 
 export default router;

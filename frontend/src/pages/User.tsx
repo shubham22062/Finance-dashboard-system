@@ -1,6 +1,6 @@
 import Navbar from "../components/navbar"
 import SideBar from "../components/sidebar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 import type { ChangeEvent, FormEvent } from "react";
 
@@ -14,11 +14,20 @@ interface SignUpData{
     role:Role|""
 }
 
+interface UserTypes{
+    _id:string;
+    name:string;
+    email:string;
+    role:string;
+}
+
 
 
 export default function User(){
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const [users, setUsers] = useState<UserTypes[]>([]);
 
     const [data , setData] = useState<SignUpData>({
         name:"",
@@ -54,8 +63,10 @@ export default function User(){
             "http://localhost:4000/api/auth/register",
             data
         );
+        setUsers((prev)=>[...prev, res.data.user])
         console.log(res.data);
-        alert("user Registered");
+        
+        setIsOpen(false)
         
         setData({
             name:"",
@@ -70,6 +81,19 @@ export default function User(){
         alert("Registration Failed")
     }
 };
+ 
+useEffect(()=>{
+    fetchUsers
+},[])
+
+const fetchUsers = async() =>{
+    try {
+        const res = await axios.get("http://localhost:4000/api/auth/users");
+         setUsers(res.data);
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 
 
