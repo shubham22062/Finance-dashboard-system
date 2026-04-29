@@ -72,8 +72,12 @@ export const Login = async(req:Request, res:Response)=>{
 }
 
 export const getUsers = async(req:AuthRequest, res:Response)=>{
-    const users =  await User.find();
-    res.json(users);
-}
+   try {
+     const users =  await User.find().select("-password");
+     res.json(users);
+   } catch (error) {
+     res.status(500).json({message:"Server Error"})
+   }
+};
 
 

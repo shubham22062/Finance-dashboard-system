@@ -19,6 +19,7 @@ interface UserTypes{
     name:string;
     email:string;
     role:string;
+    isActive:boolean;
 }
 
 
@@ -34,6 +35,7 @@ export default function User(){
         email:"",
         password:"",
         role:""
+       
     });
     
     //handle text inputs
@@ -73,6 +75,7 @@ export default function User(){
             email:"",
             password:"",
             role:""
+           
         });
 
         
@@ -147,7 +150,7 @@ const fetchUsers = async() =>{
 
                     <div className="mt-5 border-2 w-full border-gray-300 rounded-xl overflow-x-auto">
                         <div className="min-w-[800px] p-4">
-                            <div className="grid grid-cols-6 gap-4 p-2 font-bold border-b border-gray-300">
+                            <div className="grid grid-cols-5 gap-4 p-2 font-bold border-b border-gray-300">
                                 <span>User</span>
                                 <span>Email</span>
                                 <span>Role</span>
@@ -155,6 +158,14 @@ const fetchUsers = async() =>{
                                 <span>Action</span>
                                 
                             </div>
+                            {users.map((user)=>(
+                                <div key={user._id} className="grid grid-cols-5 gap-4 p-2 boder-b border-gray-200">
+                                    <span>{user.name}</span>
+                                    <span>{user.email}</span>
+                                    <span>{user.role}</span>
+                                    <span className={user.isActive ? "text-green-500" : "text-red-500"}>{user.isActive ? "Active" : "Inactive"}</span>
+                                </div>
+                            ))}
                     </div>
                     </div>
 

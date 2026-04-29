@@ -200,7 +200,7 @@ export default function Transactions() {
                             ))}
                         </div>
                     </div>
-                    <h1>shubham</h1>
+                    
                 </div>
 
                 {/* MODAL: Added max-height and scrolling to ensure it fits mobile screens */}
