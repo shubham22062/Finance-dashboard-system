@@ -70,6 +70,9 @@ export default function User(){
         alert("Registration Failed")
     }
 };
+
+
+
     return(
         <div className="min-h-screen">
                 <Navbar/>
@@ -116,6 +119,19 @@ export default function User(){
                             placeholder="search the user by name or email..."
                             className="border-2 border-gray-200 bg-gray-200 w-[90%] p-2 rounded-md"
                         />
+                    </div>
+
+                    <div className="mt-5 border-2 w-full border-gray-300 rounded-xl overflow-x-auto">
+                        <div className="min-w-[800px] p-4">
+                            <div className="grid grid-cols-6 gap-4 p-2 font-bold border-b border-gray-300">
+                                <span>User</span>
+                                <span>Email</span>
+                                <span>Role</span>
+                                <span>Status</span>
+                                <span>Action</span>
+                                
+                            </div>
+                    </div>
                     </div>
 
                     </div>
@@ -211,6 +227,13 @@ export default function User(){
           className="w-full mt-4 bg-green-400 text-white font-bold rounded-xl py-2 hover:bg-green-500"
         >
           Sign Up
+        </button>
+
+        <button
+          onClick={()=>setIsOpen(false)}
+          className="w-full mt-4 bg-red-400 text-white font-bold rounded-xl py-2 hover:bg-red-500"
+        >
+          cancle
         </button>
       </form>
     </div>
