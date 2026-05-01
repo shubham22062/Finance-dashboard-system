@@ -1,5 +1,5 @@
 import express from 'express';
-import { Login, Register, getUsers} from '../controllers/auth.controllers.js';
+import { Login, Register, deleteUsers, getUsers} from '../controllers/auth.controllers.js';
 import { validate } from '../middleware/validate.middleware.js';
 import { loginSchema, registerSchema } from '../validators/auth.validators.js';
 
@@ -83,5 +83,7 @@ router.post("/register", validate(registerSchema), Register);
 router.post("/login", validate(loginSchema), Login);
 
 router.get("/users", getUsers);
+
+router.delete("/:id",deleteUsers)
 
 export default router;

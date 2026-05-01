@@ -3,6 +3,7 @@ import User from "../models/user.models.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utlis/jwt.js";
 import type { AuthRequest } from "../middleware/auth.middleware.js";
+import mongoose from "mongoose";
 
 export const Register = async(req:Request , res:Response)=>{
   try {
@@ -26,7 +27,7 @@ export const Register = async(req:Request , res:Response)=>{
     res.status(201).json({
       token:generateToken(user),
       user:{
-          id:user._id,
+          _id:user._id,
           name : user.name,
           email:user.email,
           role:user.role,
@@ -58,7 +59,7 @@ export const Login = async(req:Request, res:Response)=>{
         res.json({
             token:generateToken(user),
             user:{
-                id:user._id,
+                _id:user._id,
                 name:user.name,
                 email:user.email,
                 role:user.role,
@@ -78,6 +79,24 @@ export const getUsers = async(req:AuthRequest, res:Response)=>{
    } catch (error) {
      res.status(500).json({message:"Server Error"})
    }
+};
+
+
+export const deleteUsers = async (req: AuthRequest, res: Response) => {
+  try {
+    const userID = req.params.id;
+
+    const user = await User.findByIdAndDelete(userID);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User deleted successfully" });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
 };
 
 
