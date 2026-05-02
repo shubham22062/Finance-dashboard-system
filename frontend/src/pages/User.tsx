@@ -25,6 +25,9 @@ export default function User(){
 
     const [isOpen, setIsOpen] = useState(false);
     const [users, setUsers] = useState<UserTypes[]>([]);
+    const [search, setSearch] = useState("");
+    
+
 
     const [data , setData] = useState<SignUpData>({
         name:"",
@@ -108,6 +111,13 @@ export default function User(){
         }
     }
 
+    const filteredUsers = users.filter((user)=>{
+      return (
+          user.name.toLowerCase().includes(search.toLowerCase()) ||
+        user.email.toLowerCase().includes(search.toLowerCase())
+      )
+    }) 
+
     return(
         <div className="min-h-screen">
             <Navbar/>
@@ -164,7 +174,9 @@ export default function User(){
                     <div className="w-full border-2 border-gray-200 mt-8 p-6 rounded-md">
                         <input
                             type="search"
+                            value={search}
                             placeholder="search the user by name or email..."
+                            onChange={(e)=>setSearch(e.target.value)}
                             className="border-2 border-gray-200 bg-gray-200 w-[90%] p-2 rounded-md"
                         />
                     </div>
@@ -181,7 +193,7 @@ export default function User(){
                                 <span>Action</span>
                             </div>
 
-                            {users.map((user)=>(
+                            {filteredUsers.map((user)=>(
                                 <div key={user._id} className="grid grid-cols-5 gap-4 p-2 border-b border-gray-200">
                                     <span>{user.name}</span>
                                     <span>{user.email}</span>
