@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
+import Cards from "../components/cards";
 
 export default function Analytics(){
     return(
@@ -9,14 +10,12 @@ export default function Analytics(){
                     <SideBar/>
                     <div className="flex-1 p-6 ">
                      <div className="flex justify-between items-center flex-wrap gap-4">
-    
-    {/* LEFT */}
-                    <div>
+                        <div>
                         <h1 className="text-3xl font-bold">Advance Analytics</h1>
                         <p className="text-gray-500 pt-2">
                             Deep insights and comprehensive financial analysis
                         </p>
-                    </div>
+                      </div>
 
                     {/* RIGHT CONTROLS */}
                     <div className="flex items-center gap-3">
@@ -38,7 +37,15 @@ export default function Analytics(){
 
                     </div>
                 </div>
+
+
+                {/*card*/}
+                <div>
+                    <Cards/>
                 </div>
+
+                </div>
+                
                 </div>
         
                </div>
