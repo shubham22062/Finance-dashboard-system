@@ -2,14 +2,15 @@ import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
 import Cards from "../components/cards";
 import { useState } from "react";
+import Overview from "../components/overview";
 
 export default function Analytics(){
 
-    const [toggle , setToggle] = useState("Overview");
+    const [activeTab, setActiveTab] = useState("overview")
 
-    const Ontoggle = ()=>{
-        
-    }
+    const activeStyle = "bg-white rounded-xl border border-gray-50 p-2"
+
+    const normalStyle = "text-gray-500"
     
     return(
         <div className="min-h-screen">
@@ -54,11 +55,16 @@ export default function Analytics(){
                    
                    <div className="bg-gray-300 border rounded-xl border-gray-300 w-full mt-5">
                         <div className="grid grid-cols-4 gap-5 p-2 text-center">
-                            <button>Overview</button>
+                            <button onClick={()=>setActiveTab("overview")}
+                                className={activeTab === "overview" ? activeStyle : normalStyle}
+                                >Overview</button>
                             <button>Trends</button>
                             <button>breakdown</button>
                             <button>Insight</button>
                         </div>
+                   </div>
+                   <div className="mt-6">
+                        {activeTab === "overview" && <Overview/>}
                    </div>
 
                 </div>
