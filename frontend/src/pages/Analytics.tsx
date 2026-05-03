@@ -1,8 +1,16 @@
 import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
 import Cards from "../components/cards";
+import { useState } from "react";
 
 export default function Analytics(){
+
+    const [toggle , setToggle] = useState("Overview");
+
+    const Ontoggle = ()=>{
+
+    }
+    
     return(
         <div className="min-h-screen">
                 <Navbar/>
@@ -43,6 +51,15 @@ export default function Analytics(){
                 <div>
                     <Cards/>
                 </div>
+                   
+                   <div className="bg-gray-300 border rounded-xl border-gray-300 w-full mt-5">
+                        <div className="grid grid-cols-4 gap-5 p-2 text-center">
+                            <button>Overview</button>
+                            <button>Trends</button>
+                            <button>breakdown</button>
+                            <button>Insight</button>
+                        </div>
+                   </div>
 
                 </div>
                 
