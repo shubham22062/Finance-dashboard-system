@@ -99,7 +99,18 @@ export const getMonthlyTrends = async (req: AuthRequest, res: Response) => {
             year: { $year: "$date" },
             month: { $month: "$date" }
           },
-          total: { $sum: "$amount" }
+
+          income: {
+            $sum: {
+              $cond: [{ $eq: ["$type", "income"] }, "$amount", 0]
+            }
+          },
+
+          expense: {
+            $sum: {
+              $cond: [{ $eq: ["$type", "expense"] }, "$amount", 0]
+            }
+          }
         }
       },
       {
@@ -108,6 +119,7 @@ export const getMonthlyTrends = async (req: AuthRequest, res: Response) => {
     ]);
 
     res.json(data);
+
   } catch (error) {
     res.status(500).json({ message: "Error fetching trends" });
   }
