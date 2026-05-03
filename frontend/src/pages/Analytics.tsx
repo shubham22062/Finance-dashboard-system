@@ -8,7 +8,7 @@ export default function Analytics(){
     const [toggle , setToggle] = useState("Overview");
 
     const Ontoggle = ()=>{
-
+        
     }
     
     return(
