@@ -3,6 +3,7 @@ import SideBar from "../components/sidebar";
 import Cards from "../components/cards";
 import { useState } from "react";
 import Overview from "../components/overview";
+import Trends from "../components/trends";
 
 export default function Analytics(){
 
@@ -58,13 +59,21 @@ export default function Analytics(){
                             <button onClick={()=>setActiveTab("overview")}
                                 className={activeTab === "overview" ? activeStyle : normalStyle}
                                 >Overview</button>
-                            <button>Trends</button>
+                            <button onClick={()=>setActiveTab("trends")}
+                            className={activeTab === "trends" ? activeStyle : normalStyle}
+                                >Trends</button>
                             <button>breakdown</button>
                             <button>Insight</button>
                         </div>
                    </div>
                    <div className="mt-6">
                         {activeTab === "overview" && <Overview/>}
+
+                        {activeTab === "trends" && (
+                            <div> 
+                                <Trends/>
+                            </div>
+                        )}
                    </div>
 
                 </div>
