@@ -4,6 +4,7 @@ import Cards from "../components/cards";
 import { useState } from "react";
 import Overview from "../components/overview";
 import Trends from "../components/trends";
+import Breakdown from "../components/breakdown";
 
 export default function Analytics(){
 
@@ -62,7 +63,9 @@ export default function Analytics(){
                             <button onClick={()=>setActiveTab("trends")}
                             className={activeTab === "trends" ? activeStyle : normalStyle}
                                 >Trends</button>
-                            <button>breakdown</button>
+                            <button onClick={()=>setActiveTab("breakdown")}
+                            className={activeTab === "breakdown" ? activeStyle : normalStyle}
+                                >breakdown</button>
                             <button>Insight</button>
                         </div>
                    </div>
@@ -72,6 +75,12 @@ export default function Analytics(){
                         {activeTab === "trends" && (
                             <div> 
                                 <Trends/>
+                            </div>
+                        )}
+
+                        {activeTab === "breakdown" && (
+                            <div>
+                                <Breakdown/>
                             </div>
                         )}
                    </div>

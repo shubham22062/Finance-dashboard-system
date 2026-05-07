@@ -43,10 +43,58 @@ export default function Breakdown(){
 
             setData(res.data)
         } catch (error) {
-            
+            console.error(error);
         }
-    }
+    };
+
     return(
-        <h1>This is breakdown page</h1>
+        <div className="border border-gray-200 rounded-3xl p-6 w-full mt-6">
+
+      <h1 className="text-3xl font-bold">
+        Category Distribution
+      </h1>
+
+      <p className="text-gray-500 text-lg mt-2">
+        Income and expense distribution by category
+      </p>
+
+      <div className="w-full h-[450px] mt-10">
+
+        <ResponsiveContainer>
+
+          <PieChart>
+
+            <Pie
+              data={data}
+              dataKey="total"
+              nameKey="_id"
+              cx="50%"
+              cy="50%"
+              outerRadius={140}
+              label={({ name, percent }) =>
+                `${name} (${((percent || 0) * 100).toFixed(0)}%)`
+              }
+            >
+
+              {data.map((_, index) => (
+                <Cell
+                  key={index}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+
+            </Pie>
+
+            <Tooltip />
+
+            <Legend />
+
+          </PieChart>
+
+        </ResponsiveContainer>
+
+      </div>
+
+    </div>
     )
  }
