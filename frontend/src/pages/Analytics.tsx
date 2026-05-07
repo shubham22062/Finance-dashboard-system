@@ -55,8 +55,8 @@ export default function Analytics(){
                     <Cards/>
                 </div>
                    
-                   <div className="bg-gray-300 border rounded-xl border-gray-300 w-full mt-5">
-                        <div className="grid grid-cols-4 gap-5 p-2 text-center">
+                   <div className="bg-gray-200 border rounded-xl border-gray-300 w-full mt-5">
+                        <div className="grid grid-cols-3 gap-5 p-1 text-center">
                             <button onClick={()=>setActiveTab("overview")}
                                 className={activeTab === "overview" ? activeStyle : normalStyle}
                                 >Overview</button>
@@ -66,7 +66,7 @@ export default function Analytics(){
                             <button onClick={()=>setActiveTab("breakdown")}
                             className={activeTab === "breakdown" ? activeStyle : normalStyle}
                                 >breakdown</button>
-                            <button>Insight</button>
+                            
                         </div>
                    </div>
                    <div className="mt-6">

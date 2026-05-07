@@ -1,4 +1,44 @@
+import { useState, useEffect } from "react"
+import axios from "axios";
+
+interface summaryData{
+    totalIncome:number;
+    totalExpense:number;
+    netBalance:number;
+}
+
 export default function cards(){
+
+    const[ data , setData] = useState<summaryData>({
+        totalIncome:0,
+        totalExpense:0,
+        netBalance:0
+    })
+
+    const fetchSummmary = async()=>{
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await axios.get(
+                "http://localhost:4000/api/dashboard/summary",
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            setData(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(()=>{
+        fetchSummmary();
+    },[])
+
+
     return(
           <div className="mt-4 flex gap-3">
                  <div className="border-2 rounded-xl p-6 border-gray-200 w-90 h-40 transition-transform duration-300 hover:scale-105 ">
@@ -8,7 +48,7 @@ export default function cards(){
                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
                     </svg>
                     </div>
-                     <span className="block text-bold text-green-700 text-2xl pt-7">$32,500</span>
+                     <span className="block text-bold text-green-700 text-2xl pt-7">${data.totalIncome}</span>
                      <div className="flex pt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
@@ -28,7 +68,7 @@ export default function cards(){
                     </svg>
 
                     </div>
-                     <span className="block text-bold text-red-500 text-2xl pt-7">$4,440</span>
+                     <span className="block text-bold text-red-500 text-2xl pt-7">${data.totalExpense}</span>
                      <div className="flex pt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 4.5 15 15m0 0V8.25m0 11.25H8.25" />
@@ -49,7 +89,7 @@ export default function cards(){
                     </svg>
 
                     </div>
-                     <span className="block text-bold text-blue-500 text-2xl pt-7">$28,110</span>
+                     <span className="block text-bold text-blue-500 text-2xl pt-7">${data.netBalance}</span>
                      <div className="flex pt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-4">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
