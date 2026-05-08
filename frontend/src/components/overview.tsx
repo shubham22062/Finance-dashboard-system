@@ -54,7 +54,7 @@ export default function Overview(){
         Income, expenses, and net balance trends
       </p>
 
-      <div className="w-full h-[350px] mt-6">
+      <div className="w-full h-[350px] mt-10">
         <ResponsiveContainer>
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />

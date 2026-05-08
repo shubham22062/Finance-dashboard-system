@@ -48,7 +48,7 @@ export default function Breakdown(){
     };
 
     return(
-        <div className="border border-gray-200 rounded-3xl p-6 w-full mt-6">
+        <div className="border-2 border-gray-200 rounded-3xl p-4 w-full">
 
       <h1 className="text-3xl font-bold">
         Category Distribution
@@ -58,7 +58,7 @@ export default function Breakdown(){
         Income and expense distribution by category
       </p>
 
-      <div className="w-full h-[450px] mt-10">
+      <div className="w-full h-[350px] mt-10">
 
         <ResponsiveContainer>
 

@@ -2,6 +2,7 @@ import Navbar from "../components/navbar";
 import SideBar from "../components/sidebar";
 import Cards from "../components/cards";
 import Overview from "../components/overview";
+import Breakdown from "../components/breakdown";
 
 
 
@@ -23,9 +24,15 @@ export default function Dashboard(){
                
                 <Cards/>
               
-           <div className="mt-5">
+          <div className="mt-5 grid grid-cols-2 gap-3">
+             <div>
             <Overview/>
            </div>
+
+           <div>
+            <Breakdown/>
+           </div>
+          </div>
 
           </div>
         </div>
