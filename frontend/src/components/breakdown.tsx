@@ -1,12 +1,18 @@
-import { useState , useEffect } from "react"
-import axios from "axios"
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import { PieChart, Pie, Cell, Tooltip,  ResponsiveContainer, Legend } from "recharts"
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from "recharts";
 
-
-interface CategoryData{
-    _id:string;
-    total:number;
+interface CategoryData {
+  _id: string;
+  total: number;
 }
 
 const COLORS = [
@@ -15,55 +21,48 @@ const COLORS = [
   "#EC4899",
   "#F59E0B",
   "#10B981",
-  "#EF4444"
+  "#EF4444",
 ];
 
+export default function Breakdown() {
+  const [data, setData] = useState<CategoryData[]>([]);
 
+  useEffect(() => {
+    fetchCategoryStats();
+  }, []);
 
-export default function Breakdown(){
+  const fetchCategoryStats = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-    const [data , setData] = useState<CategoryData[]>([]);
-
-    useEffect(()=>{
-        fetchCategoryStats();
-    },[])
-
-    const fetchCategoryStats = async()=>{
-        try {
-            const token = localStorage.getItem("token");
-
-            const res = await axios.get("http://localhost:4000/api/dashboard/category",
-                {
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                }
-                
-            )
-
-            setData(res.data)
-        } catch (error) {
-            console.error(error);
+      const res = await axios.get(
+        "http://localhost:4000/api/dashboard/category",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-    };
+      );
 
-    return(
-        <div className="border-2 border-gray-200 rounded-3xl p-4 w-full">
+      setData(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-      <h1 className="text-3xl font-bold">
+  return (
+    <div className="border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-4 w-full bg-white dark:bg-[#1e293b] transition-colors duration-300">
+      <h1 className="text-3xl font-bold text-black dark:text-white">
         Category Distribution
       </h1>
 
-      <p className="text-gray-500 text-lg mt-2">
+      <p className="text-gray-500 dark:text-gray-400 text-lg mt-2">
         Income and expense distribution by category
       </p>
 
       <div className="w-full h-[350px] mt-10">
-
         <ResponsiveContainer>
-
           <PieChart>
-
             <Pie
               data={data}
               dataKey="total"
@@ -74,27 +73,30 @@ export default function Breakdown(){
               label={({ name, percent }) =>
                 `${name} (${((percent || 0) * 100).toFixed(0)}%)`
               }
+              labelLine={false}
             >
-
               {data.map((_, index) => (
                 <Cell
                   key={index}
                   fill={COLORS[index % COLORS.length]}
                 />
               ))}
-
             </Pie>
 
-            <Tooltip />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1e293b",
+                border: "1px solid #334155",
+                borderRadius: "12px",
+                color: "#fff",
+              }}
+            />
 
             <Legend />
 
           </PieChart>
-
         </ResponsiveContainer>
-
       </div>
-
     </div>
-    )
- }
+  );
+}

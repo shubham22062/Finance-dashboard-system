@@ -7,7 +7,7 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  CartesianGrid
+  CartesianGrid,
 } from "recharts";
 
 interface ChartData {
@@ -19,8 +19,18 @@ export default function Trends() {
   const [data, setData] = useState<ChartData[]>([]);
 
   const months = [
-    "Jan","Feb","Mar","Apr","May","Jun",
-    "Jul","Aug","Sep","Oct","Nov","Dec"
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   const fetchData = async () => {
@@ -31,8 +41,8 @@ export default function Trends() {
         "http://localhost:4000/api/dashboard/trends",
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -44,13 +54,14 @@ export default function Trends() {
           income === 0 ? 0 : ((income - expense) / income) * 100;
 
         return {
-          name: `${months[item._id.month - 1]} ${item._id.year.toString().slice(2)}`,
-          savings: Number(savings.toFixed(1))
+          name: `${
+            months[item._id.month - 1]
+          } ${item._id.year.toString().slice(2)}`,
+          savings: Number(savings.toFixed(1)),
         };
       });
 
       setData(formatted);
-
     } catch (error) {
       console.error(error);
     }
@@ -61,32 +72,65 @@ export default function Trends() {
   }, []);
 
   return (
-    <div className="border border-gray-200 rounded-2xl p-6 bg-gray-100">
-
-      <h1 className="text-2xl font-bold">
+    <div className="border border-gray-200 dark:border-gray-700 rounded-2xl p-6 bg-gray-100 dark:bg-[#1e293b] transition-colors duration-300">
+      <h1 className="text-2xl font-bold text-black dark:text-white">
         Savings Rate Trend
       </h1>
 
-      <p className="text-gray-500 mt-1">
+      <p className="text-gray-500 dark:text-gray-400 mt-1">
         Monthly savings as percentage of income
       </p>
 
       <div className="w-full h-[320px] mt-6">
         <ResponsiveContainer>
           <AreaChart data={data}>
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="#9ca3af"
+              opacity={0.2}
+            />
 
-            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="name"
+              stroke="#9ca3af"
+              tick={{ fill: "#9ca3af" }}
+            />
 
-            <XAxis dataKey="name" />
-            <YAxis domain={[0, 100]} />
+            <YAxis
+              domain={[0, 100]}
+              stroke="#9ca3af"
+              tick={{ fill: "#9ca3af" }}
+            />
 
-            <Tooltip formatter={(value:any) => `${value}%`} />
+            <Tooltip
+              formatter={(value: any) => `${value}%`}
+              contentStyle={{
+                backgroundColor: "#1e293b",
+                border: "1px solid #334155",
+                borderRadius: "12px",
+                color: "#fff",
+              }}
+            />
 
             {/* Gradient */}
             <defs>
-              <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.8}/>
-                <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.2}/>
+              <linearGradient
+                id="purpleGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  offset="0%"
+                  stopColor="#8b5cf6"
+                  stopOpacity={0.8}
+                />
+                <stop
+                  offset="100%"
+                  stopColor="#8b5cf6"
+                  stopOpacity={0.2}
+                />
               </linearGradient>
             </defs>
 
@@ -98,7 +142,6 @@ export default function Trends() {
               fill="url(#purpleGradient)"
               dot={false}
             />
-
           </AreaChart>
         </ResponsiveContainer>
       </div>

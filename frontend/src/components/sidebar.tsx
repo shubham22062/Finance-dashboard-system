@@ -15,7 +15,7 @@ export default function SideBar() {
 
         <div className="min-h-screen flex text-lg">
 
-            <aside className="bg-white dark:bg-black py-10 px-10 w-80 border border-gray-200 dark:border-black transition-colors duration-300">
+            <aside className="bg-white dark:bg-black py-10 px-10 w-80 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
 
                 {/* DASHBOARD */}
 
