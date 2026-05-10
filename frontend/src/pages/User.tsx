@@ -130,7 +130,7 @@ export default function User() {
   });
 
   return (
-    <div className="min-h-screen bg-white text-black dark:bg-[#0f172a] dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
       <Navbar />
 
       <div className="flex">
