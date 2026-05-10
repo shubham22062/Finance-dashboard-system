@@ -15,10 +15,10 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/signin" element={<SignIn/>}/>
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
-        <Route path="/transaction" element={<ProtectedRoute><Transactions/></ProtectedRoute>}/>
-        <Route path="/analytic" element={<ProtectedRoute><Analytics/></ProtectedRoute>}/>
-        <Route path="/user" element={<ProtectedRoute><User/></ProtectedRoute>}/>
+        <Route path="/dashboard" element={<ProtectedRoute roles={["viewer", "analyst", "admin"]}><Dashboard/></ProtectedRoute>}/>
+        <Route path="/transaction" element={<ProtectedRoute roles={["viewer" , "analyst", "admin" ]}><Transactions/></ProtectedRoute>}/>
+        <Route path="/analytic" element={<ProtectedRoute roles={["analyst" , "admin"]}><Analytics/></ProtectedRoute>}/>
+        <Route path="/user" element={<ProtectedRoute roles = {["admin"]}><User/></ProtectedRoute>}/>
       </Routes>
     </BrowserRouter>
   );
