@@ -10,6 +10,9 @@ import {
   CartesianGrid,
 } from "recharts";
 
+import { API_URI } from "../utlis/cred";
+
+
 interface ChartData {
   name: string;
   savings: number;
@@ -38,7 +41,7 @@ export default function Trends() {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:4000/api/dashboard/trends",
+        `${API_URI}/api/dashboard/trends`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

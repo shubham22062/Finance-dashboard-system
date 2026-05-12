@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { API_URI } from "../utlis/cred";
 interface summaryData {
   totalIncome: number;
   totalExpense: number;
@@ -19,7 +19,7 @@ export default function Cards() {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:4000/api/dashboard/summary",
+        `${API_URI}/api/dashboard/summary`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

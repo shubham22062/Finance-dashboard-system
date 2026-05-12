@@ -1,6 +1,8 @@
 import React, { useState, } from "react"
 import type { ChangeEvent, FormEvent } from "react";
 import axios from "axios";
+import { API_URI } from "../utlis/cred";
+import { useNavigate } from "react-router-dom";
 
 
 type Role = "admin"|"analyst"|"viewer";
@@ -16,6 +18,8 @@ interface SignUpData{
 
 
 export default function SignUp (){
+
+  const navigate = useNavigate();
 
 
 const [data , setData] = useState<SignUpData>({
@@ -49,11 +53,12 @@ const handleSubmit = async (e:FormEvent<HTMLFormElement>)=>{
     }
     try {
         const res = await axios.post(
-            "http://localhost:4000/api/auth/register",
+            `${API_URI}/api/auth/register`,
             data
         );
         console.log(res.data);
         alert("user Registered");
+        navigate("/signin")
         
         setData({
             name:"",

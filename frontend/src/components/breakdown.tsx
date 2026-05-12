@@ -10,6 +10,8 @@ import {
   Legend,
 } from "recharts";
 
+import { API_URI } from "../utlis/cred";
+
 interface CategoryData {
   _id: string;
   total: number;
@@ -30,13 +32,14 @@ export default function Breakdown() {
   useEffect(() => {
     fetchCategoryStats();
   }, []);
+ 
 
   const fetchCategoryStats = async () => {
     try {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:4000/api/dashboard/category",
+        `${API_URI}/api/dashboard/category`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
