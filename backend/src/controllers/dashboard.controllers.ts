@@ -58,6 +58,7 @@ export const getCategoryStats = async (req: AuthRequest, res: Response) => {
         $match: {
           createdBy: userId,
           isDeleted: false
+          
         }
       },
       {
