@@ -1,8 +1,8 @@
-import Navbar from "../components/navbar";
-import SideBar from "../components/sidebar";
-import Cards from "../components/cards";
-import Overview from "../components/overview";
-import Breakdown from "../components/breakdown";
+import Navbar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
+import Cards from "../components/Cards";
+import Overview from "../components/Overview";
+import Breakdown from "../components/Breakdown";
 
 export default function Dashboard() {
   return (

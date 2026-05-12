@@ -1,10 +1,10 @@
-import Navbar from "../components/navbar";
-import SideBar from "../components/sidebar";
-import Cards from "../components/cards";
+import Navbar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
+import Cards from "../components/Cards";
 import { useState } from "react";
-import Overview from "../components/overview";
-import Trends from "../components/trends";
-import Breakdown from "../components/breakdown";
+import Overview from "../components/Overview";
+import Trends from "../components/Trends";
+import Breakdown from "../components/Breakdown";
 
 export default function Analytics() {
 

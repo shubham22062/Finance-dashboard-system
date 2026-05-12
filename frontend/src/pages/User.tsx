@@ -1,5 +1,5 @@
-import Navbar from "../components/navbar";
-import SideBar from "../components/sidebar";
+import Navbar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import type { ChangeEvent, FormEvent } from "react";

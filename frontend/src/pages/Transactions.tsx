@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/navbar";
-import SideBar from "../components/sidebar";
+import Navbar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
 import axios from "axios";
 import { API_URI } from "../utlis/cred";
 
